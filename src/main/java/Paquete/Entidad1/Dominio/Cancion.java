@@ -35,5 +35,5 @@ public class Cancion {
     @JsonBackReference
     @ManyToMany(mappedBy = "canciones")
     private List<ListaDeReproduccion> entidades2;
-    
+
 }
