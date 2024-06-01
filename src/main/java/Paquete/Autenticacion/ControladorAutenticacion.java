@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/autenticacion")
+@RequestMapping("/usuarios")
 @RequiredArgsConstructor
 public class ControladorAutenticacion {
 
     private final ServicioAutenticacion servicioAutenticacion;
 
-    @PostMapping("/registro")
+    @PostMapping("/register")
     public ResponseEntity<RespuestaJWT> registrar(@RequestBody @Valid SolicitudRegistro solicitud) {
         return ResponseEntity.ok(servicioAutenticacion.registrar(solicitud));
     }
 
-    @PostMapping("/inicio-sesion")
+    @PostMapping("/login")
     public ResponseEntity<RespuestaJWT> iniciarSesion(@RequestBody @Valid SolicitudInicioSesion solicitud) {
         return ResponseEntity.ok(servicioAutenticacion.iniciarSesion(solicitud));
     }

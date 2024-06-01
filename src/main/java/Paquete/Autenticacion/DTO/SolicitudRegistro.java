@@ -10,18 +10,9 @@ public class SolicitudRegistro {
     private String nombre;
 
     @NotNull
-    private String apellido;
-
-    @NotNull
-    private Integer edad;
-
-    @NotNull
     private String correo;
 
     @NotNull
     private String contrasena;
-
-    @NotNull
-    private Boolean esAdministrador;
 
 }

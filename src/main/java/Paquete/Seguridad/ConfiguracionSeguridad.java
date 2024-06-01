@@ -47,7 +47,7 @@ public class ConfiguracionSeguridad {
                 )
                 .addFilterBefore(filtroAutenticacionJWT, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(autorizacion -> autorizacion
-                        .requestMatchers("/autenticacion/**").permitAll()
+                        .requestMatchers("/usuarios/**").permitAll()
                         .anyRequest().authenticated()
                 ).build();
     }

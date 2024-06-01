@@ -18,7 +18,7 @@ public class SendNewPlaylistMail extends ApplicationEvent {
         super(usuario.getCorreo());
         Map<String, Object> properties = new HashMap<>();
         properties.put("userName", usuario.getNombre());
-        properties.put("playlistName", usuario.getEdad()); //todo: fix this
+        properties.put("playlistName", "Hola"); //todo: fix this
 
         this.mail = Mail.builder()
                 .from(email)
