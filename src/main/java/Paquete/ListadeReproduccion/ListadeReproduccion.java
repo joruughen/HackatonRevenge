@@ -1,6 +1,6 @@
 package Paquete.ListadeReproduccion;
 
-import Paquete.Entidad1.Dominio.Cancion;
+import Paquete.Cancion.Dominio.Cancion;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
