@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
+import Paquete.Cancion.Dominio.Cancion;
+import Paquete.ListadeReproduccion.ListadeReproduccion;
+import Paquete.ListadeReproduccion.ListadeReproduccionServicio;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,6 +36,15 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     LocalDateTime creadoAlas;
     LocalDateTime actualizadoAlas;
+
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id")
+    List<ListadeReproduccion> listasDeReproduccion;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id")
+    List<Cancion> canciones;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

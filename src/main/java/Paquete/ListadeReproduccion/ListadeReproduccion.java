@@ -1,6 +1,7 @@
 package Paquete.ListadeReproduccion;
 
 import Paquete.Cancion.Dominio.Cancion;
+import Paquete.Usuario.Dominio.Usuario;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -27,4 +28,8 @@ public class ListadeReproduccion {
             joinColumns = @JoinColumn(name = "ListadeReproduccion_id"),
             inverseJoinColumns = @JoinColumn(name = "Cancion_id"))
     private List<Cancion> canciones;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 }

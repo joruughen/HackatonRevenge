@@ -1,6 +1,8 @@
 package Paquete.ListadeReproduccion;
 
 import Paquete.Cancion.Dominio.Cancion;
+import Paquete.Usuario.Dominio.Usuario;
+import Paquete.Usuario.Infraestructura.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,33 +13,33 @@ import java.util.Optional;
 public class ListadeReproduccionServicio {
 
     @Autowired
-    private ListadeReproduccionRepositorio repositorio;
+    private ListadeReproduccionRepositorio listadeReproduccionRepositorio;
 
-//    public List<ListadeReproduccion> obtenerTodasLasListasDeUsuario(Integer userId) {
-//        return repositorio.findAllByUserId(userId);
-//    }
+    @Autowired
+    private RepositorioUsuario repositorioUsuario;
 
-    public Optional<ListadeReproduccion> obtenerListaPorId(Integer id) {
-        return repositorio.findById(id);
+    public List<ListadeReproduccion> getPlaylistsByUserCorreo(String correo) {
+        Usuario usuario = repositorioUsuario.findByCorreo(correo).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return listadeReproduccionRepositorio.findAllByIdUser(usuario.getId());
     }
 
-    public ListadeReproduccion guardarLista(Integer userId, ListadeReproduccion lista) {
-        lista.setIdUser(userId);
-        return repositorio.save(lista);
+    public Optional<ListadeReproduccion> getPlaylistById(Integer playlistId) {
+        return listadeReproduccionRepositorio.findById(playlistId);
     }
 
-    public void eliminarLista(Integer id) {
-        repositorio.deleteById(id);
+    public ListadeReproduccion createPlaylist(String correo, ListadeReproduccion playlist) {
+        Usuario usuario = repositorioUsuario.findByCorreo(correo).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        playlist.setIdUser(usuario.getId());
+        return listadeReproduccionRepositorio.save(playlist);
     }
 
-    public ListadeReproduccion agregarCancionALista(Integer id, Cancion cancion) {
-        Optional<ListadeReproduccion> listaOpt = repositorio.findById(id);
-        if (listaOpt.isPresent()) {
-            ListadeReproduccion lista = listaOpt.get();
-            lista.getCanciones().add(cancion);
-            return repositorio.save(lista);
-        } else {
-            throw new RuntimeException("Lista de reproducción no encontrada");
-        }
+    public ListadeReproduccion updatePlaylist(Integer playlistId, ListadeReproduccion playlistDetails) {
+        ListadeReproduccion playlist = listadeReproduccionRepositorio.findById(playlistId).orElseThrow(() -> new RuntimeException("Playlist no encontrada"));
+        playlist.setNombre(playlistDetails.getNombre());
+        return listadeReproduccionRepositorio.save(playlist);
+    }
+
+    public void deletePlaylist(Integer playlistId) {
+        listadeReproduccionRepositorio.deleteById(playlistId);
     }
 }
