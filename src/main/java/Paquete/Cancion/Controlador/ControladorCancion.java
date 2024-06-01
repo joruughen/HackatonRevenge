@@ -34,7 +34,9 @@ public class ControladorCancion {
 
     @PutMapping("/{id}")
     public ResponseEntity<Cancion> updateCancion(@RequestBody CancionDTO cancionDTO, @PathVariable Integer id) {
+
         Cancion cancion = cancionServicio.updateCancion(cancionDTO, id);
+        if (cancion.getId() == null){return ResponseEntity.status(HttpStatus.NOT_FOUND).build();}
         return ResponseEntity.status(HttpStatus.OK)
                 .header("Location","canciones/" + cancion.getId()).
                 body(cancion);
