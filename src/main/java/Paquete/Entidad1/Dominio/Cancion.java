@@ -3,7 +3,6 @@ package Paquete.Entidad1.Dominio;
 
 import Paquete.Album.Dominio.Album;
 import Paquete.Artista.Dominio.Artista;
-import Paquete.Entidad2.Dominio.Entidad2;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
