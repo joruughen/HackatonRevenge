@@ -1,6 +1,6 @@
 package Paquete.ListadeReproduccion;
 
-import Paquete.Entidad1.Dominio.Cancion;
+import Paquete.Cancion.Dominio.Cancion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +13,24 @@ public class ListadeReproduccionServicio {
     @Autowired
     private ListadeReproduccionRepositorio repositorio;
 
-    public List<ListadeReproduccion> obtenerTodasLasListasDeUsuario(int userId) {
-        return repositorio.findAllByUserId(userId);
-    }
+//    public List<ListadeReproduccion> obtenerTodasLasListasDeUsuario(Integer userId) {
+//        return repositorio.findAllByUserId(userId);
+//    }
 
-    public Optional<ListadeReproduccion> obtenerListaPorId(int id) {
+    public Optional<ListadeReproduccion> obtenerListaPorId(Integer id) {
         return repositorio.findById(id);
     }
 
-    public ListadeReproduccion guardarLista(int userId, ListadeReproduccion lista) {
+    public ListadeReproduccion guardarLista(Integer userId, ListadeReproduccion lista) {
         lista.setIdUser(userId);
         return repositorio.save(lista);
     }
 
-    public void eliminarLista(int id) {
+    public void eliminarLista(Integer id) {
         repositorio.deleteById(id);
     }
 
-    public ListadeReproduccion agregarCancionALista(int id, Cancion cancion) {
+    public ListadeReproduccion agregarCancionALista(Integer id, Cancion cancion) {
         Optional<ListadeReproduccion> listaOpt = repositorio.findById(id);
         if (listaOpt.isPresent()) {
             ListadeReproduccion lista = listaOpt.get();

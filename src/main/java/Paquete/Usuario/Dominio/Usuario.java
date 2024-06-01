@@ -16,7 +16,7 @@ public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    Integer id;
 
     @Column(nullable = false)
     Rol rol;
