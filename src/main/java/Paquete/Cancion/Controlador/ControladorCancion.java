@@ -1,6 +1,7 @@
 package Paquete.Cancion.Controlador;
 
 import Paquete.Cancion.Dominio.Cancion;
+import Paquete.Cancion.Dominio.CancionDTO;
 import Paquete.Cancion.Dominio.CancionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,11 +25,27 @@ public class ControladorCancion {
     }
 
     @PostMapping("")
-    public ResponseEntity<Cancion> createCancion(@RequestBody Cancion cancionDto) {
+    public ResponseEntity<Cancion> createCancion(@RequestBody CancionDTO cancionDto) {
         Cancion cancion = cancionServicio.createCancion(cancionDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .header("Location","study_session/" + cancion.getId()).
                 body(cancion);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Cancion> updateCancion(@RequestBody CancionDTO cancionDTO, @PathVariable Integer id) {
+        Cancion cancion = cancionServicio.updateCancion(cancionDTO, id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("Location","canciones/" + cancion.getId()).
+                body(cancion);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Cancion> deleteCancion(@PathVariable Integer id){
+        Cancion cancion = cancionServicio.deleteCancion(id);
+        if (cancion.getId() == null){return ResponseEntity.status(HttpStatus.NOT_FOUND).build();}
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 
 }
