@@ -4,6 +4,7 @@ package Paquete.Cancion.Dominio;
 import Paquete.Album.Dominio.Album;
 import Paquete.Artista.Dominio.Artista;
 import Paquete.ListadeReproduccion.ListadeReproduccion;
+import Paquete.Usuario.Dominio.Usuario;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -35,6 +36,10 @@ public class Cancion {
     @JsonBackReference
     @ManyToMany(mappedBy = "canciones")
     private List<ListadeReproduccion> listasDeReproducciones;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
 
 }
