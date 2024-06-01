@@ -1,7 +1,7 @@
 package Paquete.Entidad1.Dominio;
 
 
-import Paquete.Entidad2.Dominio.Entidad2;
+import Paquete.Artista.Dominio.Artista;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class Entidad1 {
     @JoinTable(name = "Entidad1_Entidad2",
             joinColumns = @JoinColumn(name = "Entidad1_id"),
             inverseJoinColumns = @JoinColumn(name = "Entidad2_id"))
-    private List<Entidad2> entidades2;
+    private List<Artista> entidades2;
 
 
 }
