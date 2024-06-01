@@ -4,14 +4,12 @@ import Paquete.Cancion.Dominio.Cancion;
 import Paquete.Cancion.Dominio.CancionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/Cancion")
+@RequestMapping("/canciones")
 public class ControladorCancion {
     @Autowired
     CancionServicio cancionServicio;
@@ -23,6 +21,14 @@ public class ControladorCancion {
 
         Page<Cancion> meditations = cancionServicio.getAllCanciones(page, size);
         return ResponseEntity.ok(meditations);
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Cancion> createCancion(@RequestBody Cancion cancionDto) {
+        Cancion cancion = cancionServicio.createCancion(cancionDto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header("Location","study_session/" + cancion.getId()).
+                body(cancion);
     }
 
 }

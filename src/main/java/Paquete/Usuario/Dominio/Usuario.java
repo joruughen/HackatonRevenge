@@ -24,12 +24,6 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     String nombre;
 
-    @Column(nullable = false)
-    String apellido;
-
-    @Column(nullable = false)
-    Integer edad;
-
     @Column(nullable = false, unique = true)
     String correo;
 

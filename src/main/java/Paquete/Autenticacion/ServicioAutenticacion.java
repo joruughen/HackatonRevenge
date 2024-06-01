@@ -47,8 +47,7 @@ public class ServicioAutenticacion {
         nuevoUsuario.setContrasena(encriptadorContrasenas.encode(solicitud.getContrasena()));
         nuevoUsuario.setCreadoAlas(LocalDateTime.now());
 
-        if (solicitud.getEsAdministrador()) nuevoUsuario.setRol(Rol.ADMINISTRADOR);
-        else nuevoUsuario.setRol(Rol.USUARIO);
+        nuevoUsuario.setRol(Rol.USUARIO);
 
         repositorioUsuario.save(nuevoUsuario);
 
