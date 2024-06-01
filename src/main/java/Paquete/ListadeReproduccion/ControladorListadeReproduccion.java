@@ -1,5 +1,6 @@
 package Paquete.ListadeReproduccion;
 
+import Paquete.Cancion.Dominio.Cancion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,23 @@ public class ControladorListadeReproduccion {
     @DeleteMapping("/{playlistId}")
     public ResponseEntity<Void> deletePlaylist(@PathVariable Integer playlistId) {
         listadeReproduccionServicio.deletePlaylist(playlistId);
+        return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{playlistId}/songs")
+    public ResponseEntity<List<Cancion>> getSongsInPlaylist(@PathVariable Integer playlistId) {
+        List<Cancion> canciones = listadeReproduccionServicio.getSongsInPlaylist(playlistId);
+        return ResponseEntity.ok(canciones);
+    }
+
+    @PostMapping("/{playlistId}/songs")
+    public ResponseEntity<ListadeReproduccion> addSongToPlaylist(@PathVariable Integer playlistId, @RequestBody Cancion cancion) {
+        ListadeReproduccion updatedPlaylist = listadeReproduccionServicio.addSongToPlaylist(playlistId, cancion);
+        return ResponseEntity.ok(updatedPlaylist);
+    }
+
+    @DeleteMapping("/{playlistId}/songs/{songId}")
+    public ResponseEntity<Void> removeSongFromPlaylist(@PathVariable Integer playlistId, @PathVariable Integer songId) {
+        listadeReproduccionServicio.removeSongFromPlaylist(playlistId, songId);
         return ResponseEntity.noContent().build();
     }
 }
