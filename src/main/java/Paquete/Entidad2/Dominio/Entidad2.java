@@ -1,6 +1,6 @@
 package Paquete.Entidad2.Dominio;
 
-import Paquete.Entidad1.Dominio.Entidad1;
+import Paquete.Entidad1.Dominio.Cancion;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,5 +16,5 @@ public class Entidad2 {
 
     @JsonBackReference
     @ManyToMany(mappedBy = "entidades2")
-    private List<Entidad1> entidades1;
+    private List<Cancion> entidades1;
 }
