@@ -22,4 +22,15 @@ public class CancionServicio {
         Page<Cancion> meditations = repositorioCancion.findAll(pageable);
         return meditations.map(cancion -> mapper.map(cancion, Cancion.class));
     }
+
+    public Cancion createCancion(Cancion cancionDto) {
+        Cancion cancion = mapper.map(cancionDto, Cancion.class);
+
+//        cancion.setStudent(student);
+        repositorioCancion.save(cancion);
+        return mapper.map(cancion,Cancion.class);
+    }
+
+
+
 }
